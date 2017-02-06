@@ -1,0 +1,14 @@
+<style type='text/css' id='critical-css-server-inlined'>
+  <%= critical_css.html_safe %>
+</style>
+
+<%= render 'rails_critical_css_server/inline_load_css_script' %>
+<script id='critical-css-server-deferred'>
+  <% css_files.each do |href| %>
+    loadCSS("<%= href %>");
+  <% end %>
+</script>
+
+<noscript>
+<%= original_html.html_safe %>
+</noscript>
