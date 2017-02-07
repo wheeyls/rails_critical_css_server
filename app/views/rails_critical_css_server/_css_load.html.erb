@@ -5,7 +5,7 @@
 <%= render 'rails_critical_css_server/inline_load_css_script' %>
 <script id='critical-css-server-deferred'>
   <% css_files.each do |href| %>
-    loadCSS("<%= href %>");
+    loadCSS("<%= href %>", document.getElementById('critical-css-server-deferred'));
   <% end %>
 </script>
 
