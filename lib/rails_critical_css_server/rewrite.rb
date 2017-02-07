@@ -65,7 +65,7 @@ module RailsCriticalCssServer
     end
 
     def phantomjs_useragent?
-      request.user_agent.match(/PhantomJS/)
+      request.user_agent.present? && request.user_agent.match(/PhantomJS/)
     end
 
     def client
