@@ -30,7 +30,7 @@ module RailsCriticalCssServer
     end
 
     def log_error(error)
-      Rails.logger.error error
+      ErrorHandler.call error
     end
 
     private
