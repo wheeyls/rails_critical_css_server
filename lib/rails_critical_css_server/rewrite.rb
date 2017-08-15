@@ -48,13 +48,15 @@ module RailsCriticalCssServer
       @original_html = template.capture { block.call }
     end
 
+    def extracted_css_files
+      @extracted_css_files ||= ExtractCssFromHtml.call(original_html)
+    end
     def rewritten_html
       return @rewritten_html if defined? @rewritten_html
-      css_files = ExtractCssFromHtml.call(original_html)
 
       @rewritten_html = template.capture do
         template.render 'rails_critical_css_server/css_load',
-                        css_files: css_files,
+                        css_files: extracted_css_files,
                         critical_css: content,
                         original_html: original_html
       end
@@ -69,7 +71,7 @@ module RailsCriticalCssServer
     end
 
     def client
-      @client ||= Client.new(key, request.original_url, manifest)
+      @client ||= Client.new(key, request.original_url, extracted_css_files.first)
     end
 
     def key
