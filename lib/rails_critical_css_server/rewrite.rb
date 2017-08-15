@@ -6,9 +6,8 @@ module RailsCriticalCssServer
 
     delegate :request, :params, to: :template
 
-    def initialize(template, manifest: template.asset_url('application.css'), version: Config.version, skip: false, cache: true, &block)
+    def initialize(template, version: Config.version, skip: false, cache: true, &block)
       @template = template
-      @manifest = manifest
       @version = version
       @skip = skip
       @block = block
@@ -29,6 +28,10 @@ module RailsCriticalCssServer
     end
 
     private
+
+    def manifest
+      extracted_css_files.first
+    end
 
     def cached_value
       return @cached_value if defined? @cached_value
@@ -51,6 +54,7 @@ module RailsCriticalCssServer
     def extracted_css_files
       @extracted_css_files ||= ExtractCssFromHtml.call(original_html)
     end
+
     def rewritten_html
       return @rewritten_html if defined? @rewritten_html
 
