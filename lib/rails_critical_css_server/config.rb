@@ -1,7 +1,7 @@
 module RailsCriticalCssServer
   class Config
     class << self
-      attr_writer :host, :version, :timeout, :force_selectors, :auth_token, :width, :height
+      attr_writer :host, :version, :timeout, :force_selectors, :auth_token, :width, :height, :keep_larger_media_queries
 
       def timeout
         @timeout ||= 0.05
@@ -31,11 +31,16 @@ module RailsCriticalCssServer
         @height ||= 900
       end
 
+      def keep_larger_media_queries
+        @keep_larger_media_queries ||= false
+      end
+
       def read_options
         {
           'forceInclude' => force_selectors,
           'width' => width,
-          'height' => height
+          'height' => height,
+          'keepLargerMediaQueries' => keep_larger_media_queries
         }
       end
     end
