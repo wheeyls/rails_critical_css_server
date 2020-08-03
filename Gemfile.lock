@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails_critical_css_server (0.1.5)
+    rails_critical_css_server (0.1.6)
       httparty (>= 0.18)
       rails (>= 3.0)
 
